@@ -38,6 +38,7 @@ export interface userData {
 export interface GlobalContextProps {
   logOut: () => void;
   signInWithGoogle: () => Promise<void>;
+  handleAddToAgenda:()=>Promise<void>;
   setTransferences: () => void;
   user: Partial<User>;
   totalUsers: userData[];

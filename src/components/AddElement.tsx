@@ -11,6 +11,7 @@ import useTransferences from "../hooks/useTransferences";
 import { useContext } from "react";
 import { GlobalContext } from "../context/GlobalProvider";
 import { TransferenceObject, userData } from "../interfaces/interfaces";
+import AddContact from "./AddContact";
 
 type Props = {
   forTransference?: boolean;
@@ -20,7 +21,6 @@ export default function AddElement({ forTransference }: Props) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const { transferenceObj, addTransference, createTransference, createTransferenceToDb } = useTransferences();
   const { totalUsers } = useContext(GlobalContext);
-
   const handleAddTransference = (transfObj: TransferenceObject) => {
     createTransferenceToDb(transfObj);
     addTransference(transfObj);
@@ -78,6 +78,7 @@ export default function AddElement({ forTransference }: Props) {
                     }
                   />
                   {forTransference ? (
+                    <>
                     <Select name="receiver" onChange={createTransference} label={forTransference ? "Receiver" : "Select type of card"}>
                       {totalUsers.map((user: userData) => (
                         <SelectItem className="capitalize" key={user.name} value={user.name}>
@@ -85,6 +86,9 @@ export default function AddElement({ forTransference }: Props) {
                         </SelectItem>
                       ))}
                     </Select>
+                    <AddContact/>
+                    </>
+
                   ) : (
                     <Select name="type" onChange={handleNewCard} label={forTransference ? "Receiver" : "Select type of card"}>
                       {typeOfCards.map((card: string) => (

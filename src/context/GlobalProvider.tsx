@@ -1,7 +1,7 @@
 import { createContext, useEffect } from "react";
 import { GlobalContextProps, Store } from "../interfaces/interfaces";
 import useAuth from "../hooks/useAuth";
-import { collection, onSnapshot } from "firebase/firestore";
+import { addDoc, collection, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase/Firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { setTotalUsers } from "../slices/usersSlice";
@@ -11,6 +11,7 @@ export const GlobalContext = createContext<GlobalContextProps>({
   logOut: () => "",
   signInWithGoogle: () => Promise.resolve(),
   setTransferences: () => "",
+  handleAddToAgenda: () =>Promise.resolve(),
   user: { displayName: "", email: "" },
   totalUsers: [],
   transferences: [],
@@ -23,6 +24,25 @@ const GlobalProvider = ({ children }: any) => {
   const { transferences } = useSelector((store: Store) => store.transferences);
 
   const dispatch = useDispatch();
+
+  const handleAddToAgenda = async (values: unknown) => {
+
+    try {
+      // Assuming you have a "lotteries' collection
+      const agenda = collection(db, "users");
+
+      // Create a new document in the 'lotteries' collection
+      const data = await addDoc(agenda, values); // Assuming values contains the necessary data for the new document
+
+      // Use the reference of the newly created document to access the "numbers" subcollection
+      const agendaSub = collection(agenda, data.id, "agenda");
+
+      // Add documents to the 'numbers' subcollection
+      await addDoc(agendaSub,values);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     const collectionRef = collection(db, "users");
@@ -65,7 +85,7 @@ const GlobalProvider = ({ children }: any) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <GlobalContext.Provider value={{ logOut, signInWithGoogle, user, totalUsers, transferences }}>{children}</GlobalContext.Provider>;
+  return <GlobalContext.Provider value={{ handleAddToAgenda,logOut, signInWithGoogle, user, totalUsers, transferences }}>{children}</GlobalContext.Provider>;
 };
 
 export default GlobalProvider;

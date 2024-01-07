@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { Store, TransferenceObject, userData } from "../interfaces/interfaces";
+import { Store, TransferenceObject } from "../interfaces/interfaces";
 import { setFilterTransferenceStatus, setFilterTransferences, setTransferences } from "../slices/transferencesSlice";
 import { createId } from "../helper";
 import { useContext, useState } from "react";

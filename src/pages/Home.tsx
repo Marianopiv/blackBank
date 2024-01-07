@@ -6,11 +6,10 @@ import { quickAccesses } from "../config/config.jsx";
 import Update from "../components/Update.js";
 import { useNavigate } from "react-router-dom";
 import AddElement from "../components/AddElement.tsx";
-import AddMoney from "../components/AddMoney.tsx";
 import useHome from "../hooks/useHome.tsx";
 import "swiper/css";
 import "swiper/css/virtual";
-import { getBalance } from "../helper/index.tsx";
+import { generateNumberArrays, getBalance,sortTransferences } from "../helper/index.tsx";
 import { useContext } from "react";
 import { GlobalContext } from "../context/GlobalProvider.tsx";
 
@@ -18,6 +17,8 @@ const Home = () => {
   const navigate = useNavigate();
   const { cards } = useHome();
   const { transferences, user } = useContext(GlobalContext);
+
+  generateNumberArrays(10)
   return (
     <div className="bg-white w-screen h-screen flex p-4 font-bold flex-col items-start gap-10 flex-wrap">
       <div className="flex flex-col items-start">
@@ -43,7 +44,7 @@ const Home = () => {
       </div>
       <div className="flex flex-col items-start gap-4 ">
         <h4>Recent transferences</h4>
-        {transferences.slice(0, 4).map((transference: TransferenceObject, index: number) => (
+        {sortTransferences(transferences.slice(0, 4)).map((transference: TransferenceObject, index: number) => (
           <Transference
             key={index}
             payer={transference.payer}

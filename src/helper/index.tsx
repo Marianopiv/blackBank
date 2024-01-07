@@ -1,3 +1,4 @@
+import moment from "moment";
 import { TransferenceObject } from "../interfaces/interfaces";
 
 export const checkIfTitle = (value: string) =>
@@ -56,4 +57,35 @@ export const getBalance = (arr: TransferenceObject[], userName: string) => {
       return acc;
     }, 0);
   return result;
+};
+
+export const sortTransferences = (array: TransferenceObject[]) => {
+  return array.sort((a, b) => {
+    const dateA = moment(a.date, "DD/MM/YYYY").valueOf();
+    const dateB = moment(b.date, "DD/MM/YYYY").valueOf();
+
+    if (dateA > dateB) {
+      return -1;
+    } else if (dateA < dateB) {
+      return 1;
+    }
+  });
+};
+
+export const generateNumberArrays = (number: number) => {
+  /* let arr = [];
+  let number = 0;
+  if (number < 20) {
+    arr.push(number);
+    generateNumberArrays(number);
+  } else {
+    return arr;
+  } */
+
+  for (let index = 0; index < number; index++) {
+    debugger;
+    let element = index
+    console.log(element)    
+  }
+
 };
