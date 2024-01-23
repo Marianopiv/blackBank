@@ -19,11 +19,12 @@ type Props = {
 export default function AddElement({ forTransference }: Props) {
   const { newCard, handleAddCard, handleNewCard } = useHome();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const { transferenceObj, addTransference, createTransference, createTransferenceToDb } = useTransferences();
+  const { transferenceObj, addTransference, createTransference, createTransferenceToDb,resetTransferenceObj } = useTransferences();
   const { totalUsers } = useContext(GlobalContext);
   const handleAddTransference = (transfObj: TransferenceObject) => {
     createTransferenceToDb(transfObj);
     addTransference(transfObj);
+    resetTransferenceObj()
   };
   return (
     <>
@@ -105,9 +106,10 @@ export default function AddElement({ forTransference }: Props) {
                   Close
                 </Button>
                 <Button
+                  disabled={forTransference&&transferenceObj.amount===0}
                   color="primary"
                   onClick={forTransference ? () => handleAddTransference(transferenceObj) : () => handleAddCard(newCard)}
-                  onPress={onClose}
+                  onPress={forTransference&&transferenceObj.amount===0?()=>alert("Ingresá un importe correcto"):onClose}
                 >
                   Add
                 </Button>

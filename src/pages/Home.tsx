@@ -9,7 +9,7 @@ import AddElement from "../components/AddElement.tsx";
 import useHome from "../hooks/useHome.tsx";
 import "swiper/css";
 import "swiper/css/virtual";
-import { generateNumberArrays, getBalance,sortTransferences } from "../helper/index.tsx";
+import { generateNumberArrays, getBalance } from "../helper/index.tsx";
 import { useContext } from "react";
 import { GlobalContext } from "../context/GlobalProvider.tsx";
 
@@ -44,7 +44,7 @@ const Home = () => {
       </div>
       <div className="flex flex-col items-start gap-4 ">
         <h4>Recent transferences</h4>
-        {sortTransferences(transferences.slice(0, 4)).map((transference: TransferenceObject, index: number) => (
+        {transferences.slice(0, 4).map((transference: TransferenceObject, index: number) => (
           <Transference
             key={index}
             payer={transference.payer}

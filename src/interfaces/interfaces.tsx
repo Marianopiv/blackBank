@@ -1,4 +1,13 @@
 import { User } from "firebase/auth";
+import { DocumentData } from "firebase/firestore";
+import { IconType } from "react-icons";
+
+
+export interface publicServicesObj  {
+  type:string,
+  Icon:IconType,
+  color:string
+}
 
 export interface TransferenceObject {
   id: string;
@@ -38,7 +47,7 @@ export interface userData {
 export interface GlobalContextProps {
   logOut: () => void;
   signInWithGoogle: () => Promise<void>;
-  handleAddToAgenda:()=>Promise<void>;
+  handleAddToAgenda:(userData:DocumentData)=>Promise<void>;
   setTransferences: () => void;
   user: Partial<User>;
   totalUsers: userData[];

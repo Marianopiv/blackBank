@@ -2,7 +2,7 @@ import moment from "moment";
 import { TransferenceObject } from "../interfaces/interfaces";
 
 export const checkIfTitle = (value: string) =>
-  value === "id" || value === "status" || value === "payer" || value === "requestDate" || value === "amount";
+  value === "id" || value === "status" || value === "payer" || value === "receiver" || value === "date" || value === "amount";
 
 export const checkStatus = (value: string) =>
   value === "pending" ? "text-blue-500" : value === "success" ? "text-green-500" : value === "failed" ? "text-red-500" : "";
@@ -59,19 +59,6 @@ export const getBalance = (arr: TransferenceObject[], userName: string) => {
   return result;
 };
 
-export const sortTransferences = (array: TransferenceObject[]) => {
-  return array.sort((a, b) => {
-    const dateA = moment(a.date, "DD/MM/YYYY").valueOf();
-    const dateB = moment(b.date, "DD/MM/YYYY").valueOf();
-
-    if (dateA > dateB) {
-      return -1;
-    } else if (dateA < dateB) {
-      return 1;
-    }
-  });
-};
-
 export const generateNumberArrays = (number: number) => {
   /* let arr = [];
   let number = 0;
@@ -83,9 +70,6 @@ export const generateNumberArrays = (number: number) => {
   } */
 
   for (let index = 0; index < number; index++) {
-    debugger;
-    let element = index
-    console.log(element)    
+    let element = index;
   }
-
 };

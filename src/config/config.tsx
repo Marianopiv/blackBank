@@ -1,4 +1,11 @@
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
+import { IoWaterSharp } from "react-icons/io5";
+import { MdElectricBolt } from "react-icons/md";
+import { MdOutlineCellWifi } from "react-icons/md";
+import { MdOutlineLocalHospital } from "react-icons/md";
+import { FaPhone } from "react-icons/fa";
+import { DocumentData } from "firebase/firestore";
+
 
 export const quickAccesses = ["send money", "receive money"];
 
@@ -18,16 +25,6 @@ export const transferenceTitles = {
   7: "amount",
 };
 
-export const exampleTransferences = [
-  { id: "01", status: "success", payer: "Juan Castro", date: "05/06/2023", amount: 5000 },
-  { id: "02", status: "pending", payer: "Maria Rodriguez", date: "05/06/2023", amount: 3000 },
-  { id: "03", status: "failed", payer: "Carlos Gomez", date: "05/07/2023", amount: 7000 },
-  { id: "04", status: "success", payer: "Ana Martinez", date: "05/08/2023", amount: 4500 },
-  { id: "05", status: "pending", payer: "Luis Hernandez", date: "05/08/2023", amount: 2000 },
-  { id: "06", status: "failed", payer: "Laura Perez", date: "05/09/2023", amount: 6000 },
-  { id: "07", status: "success", payer: "Pedro Sanchez", date: "05/10/2023", amount: 8000 },
-];
-
 export const typeOfCards = ["credit", "debit"];
 
 export const statusOfTransference = ["success", "failed", "pending"];
@@ -35,6 +32,7 @@ export const statusOfTransference = ["success", "failed", "pending"];
 export const navItems = [
   { text: "dashboard", to: "/home" },
   { text: "transferences", to: "/transferences" },
+  { text: "pay services", to: "/pay-services" },
 ];
 
 // Crear un nuevo objeto Date, que contendrá la fecha y hora actuales
@@ -100,3 +98,26 @@ export const randomWords = [
   "Elysium",
   "Radiance",
 ];
+
+export const optionsData = [
+  { label: "name", value: "name,Maru Botano" },
+  { label: "email", value: "marubotano666@gmail.com,email" },
+  { label: "alias", value: "alias,MURO.GALLO.JUEGO" },
+  { label: "cbu", value: "cbu,9261842271361614811447" },
+];
+//Esto para armar el options
+
+export const publicServices = [
+  { type: "water", Icon: IoWaterSharp,color:"hover:bg-cyan-500" },
+  { type: "electricity", Icon: MdElectricBolt,color:"hover:bg-yellow-500" },
+  { type: "internet", Icon: MdOutlineCellWifi, color:"hover:bg-blue-500" },
+  { type: "hospital", Icon: MdOutlineLocalHospital, color:"hover:bg-red-500" },
+  {type:"telephone",Icon:FaPhone, color:"hover:bg-green-500" }
+];
+
+export const tempUserData = (tempUser:DocumentData) => [
+  { text: tempUser.name, label: "name" },
+  { text: tempUser.email, label: "email" },
+  { text: tempUser.alias, label: "alias" },
+  { text: tempUser.cbu, label: "cbu" },
+] 
